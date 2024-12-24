@@ -5,9 +5,11 @@ import Footer from '../Footer/Footer';
 
 const Main = () => {
     return (
-        <div>
-            <Navbar></Navbar>
-            <Outlet></Outlet>
+        <div className='bg-black'>
+            <div className='container mx-auto'>
+                <Navbar></Navbar>
+                <Outlet></Outlet>
+            </div>
             <Footer></Footer>
         </div>
     );

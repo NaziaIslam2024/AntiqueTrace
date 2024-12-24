@@ -1,8 +1,20 @@
 import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import logo from '../../assets/logoBig.png'
 
 const Navbar = () => {
+    const links = <>
+        <li><NavLink to='/'>Home</NavLink></li>
+        <li><NavLink to='/allArtifacts'>All Artifacts</NavLink></li>
+        {/* {
+            user && <>
+                <li><NavLink to='/tutorials'>Tutorials</NavLink></li>
+                <li><NavLink to='/profile'>Profile</NavLink></li>
+            </>
+        } */}
+    </>
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar text-[#ffd700] py-5">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -22,36 +34,20 @@ const Navbar = () => {
                     <ul
                         tabIndex={0}
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                        <li><a>Item 1</a></li>
-                        <li>
-                            <a>Parent</a>
-                            <ul className="p-2">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
-                            </ul>
-                        </li>
-                        <li><a>Item 3</a></li>
+                        {links}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">daisyUI</a>
+                <img className='w-10' src={logo} alt="" />
+                <a className="btn btn-ghost text-xl">Antique Trace</a>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">
-                    <li><a>Item 1</a></li>
-                    <li>
-                        <details>
-                            <summary>Parent</summary>
-                            <ul className="p-2">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
-                            </ul>
-                        </details>
-                    </li>
-                    <li><a>Item 3</a></li>
+                <ul className="menu menu-horizontal px-1 font-bold text-lg">
+                    {links}
                 </ul>
             </div>
-            <div className="navbar-end">
-                <a className="btn">Button</a>
+            <div className="navbar-end gap-4">
+                <Link className='btn bg-black text-[#ffd700] border-[#ffd700]' to='/login'>Sign in</Link>
+                <Link className='btn bg-black text-[#ffd700] border-[#ffd700]' to='/login'>Sign in</Link>
             </div>
         </div>
     );

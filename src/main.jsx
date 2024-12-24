@@ -8,9 +8,10 @@ import {
 import ErrorPage from './pages/ErrorPage/ErrorPage'
 import Main from './components/Main/Main';
 import Home from './pages/Home/Home';
-// import AllArtifacts from './pages/AllArtifacts/AllArtifacts';
-// import Registration from './pages/Registration/Registration';
-// import Login from './pages/Login/Login';
+import AllArtifacts from './pages/AllArtifacts/AllArtifacts';
+import Login from './pages/Login/Login';
+import Register from './pages/Register/Register';
+import AuthProvider from './context/AuthContext/AuthProvider';
 
 const router = createBrowserRouter([
   {
@@ -21,26 +22,28 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home></Home>
+      },
+      {
+        path: 'allArtifacts',
+        element: <AllArtifacts></AllArtifacts>
+      },
+      {
+        path: 'login',
+        element: <Login></Login>
+      },
+      {
+        path: 'register',
+        element: <Register></Register>
       }
     ]
-    //   {
-    //     path: '/allArtifacts',
-    //     element: <AllArtifacts></AllArtifacts>
-    //   },
-    //   {
-    //     path: '/registration',
-    //     element: <Registration></Registration>
-    //   },
-    //   {
-    //     path: '/login',
-    //     element: <Login></Login>
-    //   },
   },
 ]);
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>,
 )
