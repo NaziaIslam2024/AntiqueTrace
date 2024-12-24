@@ -1,13 +1,13 @@
-// import { AuthContext } from '../../providers/AuthProvider';
 import React, { useContext, useState } from 'react';
 import { FcGoogle } from "react-icons/fc";
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { FaEye } from 'react-icons/fa';
+import AuthContext from '../../context/AuthContext/AuthContext';
 
 const Register = () => {
-    // const {signInWithGoogle, createUser} = useContext(AuthContext);
-    // console.log(AuthContext);
+    const {signInWithGoogle, createUser} = useContext(AuthContext);
+
     const [showPassword, setShowPassword] = useState(null);
     const navigate = useNavigate();
     const handleSignUp = e => {
@@ -29,27 +29,27 @@ const Register = () => {
             Swal.fire("Please add at least one Uppercase letter & one Lowercase letter in your password.")
             return;
         }
-        // createUser(email, password)
-        //     .then(result => {
-        //         Swal.fire("User created successful.");
-        //         navigate('/');
-        //     })
-        //     .catch(error => {
-        //         Swal.fire({
-        //             icon: "error",
-        //             title: "Oops...",
-        //             text: error.message,
-        //         });
-        //     })
-        //     e.target.reset();
+        createUser(email, password)
+            .then(result => {
+                Swal.fire("User created successful.");
+                navigate('/');
+            })
+            .catch(error => {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: error.message,
+                });
+            })
+            e.target.reset();
     }
     const handleGoogleSignIn = () => {
-        // signInWithGoogle()
-        //     .then(result => {
-                
-        //         navigate('/');
-        //     })
-        //     .catch(error => Swal.fire("Error: ", error.message))
+        signInWithGoogle()
+            .then(result => {
+                Swal.fire("User created successful.");
+                navigate('/');
+            })
+            .catch(error => Swal.fire("Error: ", error.message))
     }
     return (
         <div
@@ -76,7 +76,7 @@ const Register = () => {
                             <p onClick={() => setShowPassword(!showPassword)} className='btn btn-xs absolute right-4 bottom-3'><FaEye /></p>
                         </div>
                         <div className="form-control mt-3">
-                            <button className="btn bg-blue-500 text-white">Sign Up</button>
+                            <button className="btn bg-[#ffd700] text-black">Sign Up</button>
                         </div>
                         <div className="text-white divider text-sm">Or</div>
                         <div className="form-control">
