@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import AuthContext from '../../context/AuthContext/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const Login = () => {
@@ -14,6 +14,7 @@ const Login = () => {
 
         signInUser(email, password)
             .then(result => {
+                console.log(result.user);
                 e.target.reset();
                 navigate('/');
             })
@@ -67,6 +68,7 @@ const Login = () => {
                                     <button className="btn bg-[#f9ae3f] rounded-3xl">Sign in</button>
                                 </div>
                             </form>
+                            <p className='text-white font-extralight text-sm text-center'>Don't have account? <Link className='text-[#f9ae3f]' to='/register'>Sign up</Link></p>
                         </div>
                     </div>
                 </div>

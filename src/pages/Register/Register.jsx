@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { FcGoogle } from "react-icons/fc";
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaEye } from 'react-icons/fa';
 import AuthContext from '../../context/AuthContext/AuthContext';
 
@@ -83,6 +83,7 @@ const Register = () => {
                             <button onClick={handleGoogleSignIn} className="btn bg-white text-[#f9ae3f]"><FcGoogle className='text-xl'></FcGoogle>Sign Up with Google</button>
                         </div>
                     </form>
+                    <p className='text-white font-extralight text-sm text-center'>Already have account? <Link className='text-[#f9ae3f]' to='/login'>Sign in</Link></p>
                 </div>
             </div>
         </div>
