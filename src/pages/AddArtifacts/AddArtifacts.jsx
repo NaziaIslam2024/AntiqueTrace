@@ -1,9 +1,12 @@
 import React, { useContext, useState } from 'react';
 import AuthContext from '../../context/AuthContext/AuthContext';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const AddArtifacts = () => {
     const {user} = useContext(AuthContext);
+    const navigate = useNavigate();
     const [myFormData, setMyFormData] = useState({});
     const handleChange = (event) => {
         setMyFormData({
@@ -16,13 +19,24 @@ const AddArtifacts = () => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const initialData = Object.fromEntries(formData.entries());
-        console.log(initialData);
+        //console.log(initialData);
         const {likeCount, ...newArtifact} = initialData;
         newArtifact.likeCount = 0;
-        console.log(newArtifact);
+        //console.log(newArtifact);
         //make a post request
-        const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/add-artifact`, newArtifact)
-        console.log(data);
+        try {
+            await axios.post(`${import.meta.env.VITE_API_URL}/add-artifact`, newArtifact)
+            .then(data => {
+                console.log(data.data)
+            })
+            e.target.reset();
+            Swal.fire('Artifact Added Successfully!!!')
+            navigate('/allArtifacts')
+        } 
+        catch (err) {
+        console.log(err)
+        Swal.fire(err.message)
+        }
     }
     return (
         <div className='bg-white'> 
