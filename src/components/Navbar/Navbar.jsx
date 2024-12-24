@@ -3,6 +3,8 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import logo from '../../assets/logoBig.png'
 import AuthContext from '../../context/AuthContext/AuthContext';
 import Swal from 'sweetalert2';
+import 'react-tooltip/dist/react-tooltip.css'
+import { Tooltip } from 'react-tooltip'
 
 const Navbar = () => {
     const { signOutUser, user } = useContext(AuthContext);
@@ -10,12 +12,12 @@ const Navbar = () => {
 
     const handleSignOut = () => {
         signOutUser()
-        .then(() => {
-            Swal.fire("User signed out successfully.");
-        })
-        .catch(error => {
-            Swal.fire('Error occured:', error.message);
-        })
+            .then(() => {
+                Swal.fire("User signed out successfully.");
+            })
+            .catch(error => {
+                Swal.fire('Error occured:', error.message);
+            })
         navigate('/');
     }
     const links = <>
@@ -65,7 +67,10 @@ const Navbar = () => {
                     user ?
                         <>
                             <div className="dropdown dropdown-end">
-                                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                <div data-tooltip-id="my-tooltip" tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                    <Tooltip id="my-tooltip" place="top" type="light" effect="float">
+                                        <span>{user.displayName}</span>
+                                    </Tooltip>
                                     <div className="w-10 rounded-full">
                                         <img alt="userPhotoo" src={user.photoURL} />
                                     </div>
