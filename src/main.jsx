@@ -14,6 +14,8 @@ import Register from './pages/Register/Register';
 import AuthProvider from './context/AuthContext/AuthProvider';
 import AddArtifacts from './pages/AddArtifacts/AddArtifacts';
 import PrivateRoute from './routes/PrivateRoute';
+import MyArtifacts from './pages/MyArtifacts/MyArtifacts';
+import LikedArtifacts from './pages/LikedArtifacts/LikedArtifacts';
 
 const router = createBrowserRouter([
   {
@@ -40,7 +42,15 @@ const router = createBrowserRouter([
       {
         path:'addArtifacts',
         element: <PrivateRoute><AddArtifacts></AddArtifacts></PrivateRoute>
-      }
+      },
+      {
+        path:'myArtifacts',
+        element: <PrivateRoute><MyArtifacts></MyArtifacts></PrivateRoute>
+      },
+      {
+        path:'likedArtifacts',
+        element: <PrivateRoute><LikedArtifacts></LikedArtifacts></PrivateRoute>
+      },
     ]
   },
 ]);
