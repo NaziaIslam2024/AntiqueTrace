@@ -81,8 +81,8 @@ const Navbar = () => {
                                     <li>
                                         <a className="justify-between">{user.displayName} </a>
                                     </li>
-                                    <li><a href='/myArtifacts'>My Artifacts</a></li>
-                                    <li><a href='/likedArtifacts'>Liked Artifacts</a></li>
+                                    <li><Link to={`/myArtifacts/${user.email}`}>My Artifacts</Link></li>
+                                    <li><Link to='/likedArtifacts'>Liked Artifacts</Link></li>
                                     <li><a onClick={handleSignOut}>Logout</a></li>
                                 </ul>
                             </div>

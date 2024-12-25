@@ -45,8 +45,9 @@ const router = createBrowserRouter([
         element: <PrivateRoute><AddArtifacts></AddArtifacts></PrivateRoute>
       },
       {
-        path:'myArtifacts',
-        element: <PrivateRoute><MyArtifacts></MyArtifacts></PrivateRoute>
+        path:'myArtifacts/:email',
+        element: <PrivateRoute><MyArtifacts></MyArtifacts></PrivateRoute>,
+        loader: ({params}) => fetch(`http://localhost:5000/my-artifacts/${params.email}`)
       },
       {
         path:'likedArtifacts',
