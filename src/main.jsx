@@ -16,6 +16,7 @@ import AddArtifacts from './pages/AddArtifacts/AddArtifacts';
 import PrivateRoute from './routes/PrivateRoute';
 import MyArtifacts from './pages/MyArtifacts/MyArtifacts';
 import LikedArtifacts from './pages/LikedArtifacts/LikedArtifacts';
+import ArtifactDetails from './pages/ArtifactDetails/ArtifactDetails';
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,11 @@ const router = createBrowserRouter([
         path:'likedArtifacts',
         element: <PrivateRoute><LikedArtifacts></LikedArtifacts></PrivateRoute>
       },
+      {
+        path:'/artifact-details/:id',
+        element:<PrivateRoute><ArtifactDetails></ArtifactDetails></PrivateRoute>,
+        loader: ({params}) => fetch(`http://localhost:5000/artifact-details/${params.id}`)
+      }
     ]
   },
 ]);
