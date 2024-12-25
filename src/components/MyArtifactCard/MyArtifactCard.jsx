@@ -1,50 +1,114 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import AuthContext from '../../context/AuthContext/AuthContext';
 
 const MyArtifactCard = ({ oneArtifact }) => {
+    const { user } = useContext(AuthContext);
+    const [allArtifacts, setAllArtifacts] = useState([])
+
+    useEffect(() => {
+        fetchAllArtifacts()
+    }, [user])
+
+    const fetchAllArtifacts = async () => {
+        const { data } = await axios.get(`http://localhost:5000/my-artifacts/${user?.email}`)
+        // console.log(data)
+        setAllArtifacts(data);
+    }
     const { _id, artifact, artifactType, created, discovered,
-    discoveredBy, historicalContexte, location, photoUrl } = oneArtifact;
+        discoveredBy, historicalContexte, location, photoUrl } = oneArtifact;
     // const [dd, setDD] = useState(oneArtifact);
     const [myFormData, setMyFormData] = useState({});
     const handleChange = (event) => {
         setMyFormData({
-          ...myFormData,
-          [event.target.name]: event.target.value,
+            ...myFormData,
+            [event.target.name]: event.target.value,
         });
     };
-    
+
     const closeModalClick = () => {
         document.getElementById('my_modal_3').close();
     }
+    const closeModalClickCross = () => {
+        document.getElementById('my_modal_3').close();
+    }
 
-    const handleUpdateClick = ({oneArtifact}) => {
+    const [updateId, setUpdateId] = useState('');
+    const handleUpdateClick = (oneArtifact) => {
+        document.getElementById('idd').value = _id;
+        document.getElementById('artifact').value = artifact;
+        document.getElementById('created').value = created;
+        document.getElementById('discovered').value = discovered;
+        document.getElementById('discoveredBy').value = discoveredBy;
+        document.getElementById('historicalContexte').value = historicalContexte;
+        document.getElementById('location').value = location;
+        document.getElementById('photoUrl').value = photoUrl;
         document.getElementById('my_modal_3').showModal();
+        console.log(oneArtifact._id)
+        setUpdateId(oneArtifact._id)
     }
 
     const handleUpdateArtifact = async (e) => {
         e.preventDefault();
+        const updateID = e.target.idd.value;
         const formData = new FormData(e.target);
         const initialData = Object.fromEntries(formData.entries());
         console.log(initialData);
+
         try {
-            await axios.put(`${import.meta.env.VITE_API_URL}/update-artifact-details/${_id}`,{
-                body: initialData
-            })
-           .then(data =>{
-            Swal.fire('Updated.')
-            // setDD(initialData)
-           })   
-        } 
+            console.log(updateID)
+            await axios.put(`${import.meta.env.VITE_API_URL}/update-artifact-details/${updateID}`, initialData)
+            // .then(data => {
+            //         if(data.modifiedCount > 0){
+            //             Swal.fire('Updated')
+            //         }
+            //         // setDD(initialData)
+            //     })
+        }
         catch (err) {
-        console.log(err)
-        Swal.fire(err.message)
+            console.log(err)
+            Swal.fire(err.message)
         }
     }
 
-    const handleDelete = async() => {
-        await axios.delete(`${import.meta.env.VITE_API_URL}/delete-my-artifact/${_id}`)
+    const handleAxiosDelete = async id => {
+        try {
+            const { data } = await axios.delete(`${import.meta.env.VITE_API_URL}/delete-my-artifact/${id}`)
+            console.log(data)
+            fetchAllArtifacts()
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                handleAxiosDelete(id)
+                // console.log(id)
+                // await axios.delete(`${import.meta.env.VITE_API_URL}/delete-my-artifact/${id}`)
+                if (data.deletedCount > 0) {
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your visa application has been deleted.",
+                        icon: "success"
+                    });
+                    // const ata = id;
+                    // handleDataFromChild(id);
+                }
+            }
+        });
     }
 
     return (
@@ -67,19 +131,21 @@ const MyArtifactCard = ({ oneArtifact }) => {
             <dialog id="my_modal_3" className="modal">
                 <div className="modal-box">
                     <form onSubmit={handleUpdateArtifact} className="card-body w-full mx-auto">
+                        <button onClick={closeModalClickCross} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                         {/* Artifact name */}
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Artifact Name</span>
                             </label>
-                            <input name='artifact' defaultValue={artifact} type="text" placeholder="Artifact name" className="input input-bordered" required />
+                            <input id='idd' type="text" name="idd" />
+                            <input id='artifact' name='artifact' type="text" placeholder="Artifact name" className="input input-bordered" required />
                         </div>
                         {/* artifact photo url */}
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Artifact's photo url</span>
                             </label>
-                            <input name='photoUrl' defaultValue={photoUrl} type="url" placeholder="Enter a url of artifact's photo" className="input input-bordered" required />
+                            <input id='photoUrl' name='photoUrl' type="url" placeholder="Enter a url of artifact's photo" className="input input-bordered" required />
                         </div>
                         {/* artifact type */}
                         <div className="form-control">
@@ -88,11 +154,11 @@ const MyArtifactCard = ({ oneArtifact }) => {
                             </label>
                             <select name="artifactType" onChange={handleChange} defaultValue="Artifact type" className="select select-ghost w-full" required>
                                 <option disabled>Artifact type</option>
-                                <option>Tool</option>
-                                <option>Weapon</option>
-                                <option>Document</option>
-                                <option>Writing</option>
-                                <option>Painting</option>
+                                <option value='Tool'>Tool</option>
+                                <option value='Weapon'>Weapon</option>
+                                <option value='Document'>Document</option>
+                                <option value='Writing'>Writing</option>
+                                <option value='Painting'>Painting</option>
                             </select>
                         </div>
                         {/* Historical Context */}
@@ -100,35 +166,35 @@ const MyArtifactCard = ({ oneArtifact }) => {
                             <label className="label">
                                 <span className="label-text">Historical Context</span>
                             </label>
-                            <input name='historicalContexte' defaultValue={historicalContexte} type="text" placeholder="Historical Context of the artifact" className="input input-bordered" required />
+                            <input id='historicalContexte' name='historicalContexte' type="text" placeholder="Historical Context of the artifact" className="input input-bordered" required />
                         </div>
                         {/* Created at */}
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Created at</span>
                             </label>
-                            <input name='created' defaultValue={created} type="text" placeholder="When this artifact had created" className="input input-bordered" required />
+                            <input id='created' name='created' type="text" placeholder="When this artifact had created" className="input input-bordered" required />
                         </div>
                         {/* discovered at */}
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Discovered at</span>
                             </label>
-                            <input name='discovered' defaultValue={discovered} type="text" placeholder="When this artifact had discovered" className="input input-bordered" min='0' required />
+                            <input id='discovered' name='discovered' type="text" placeholder="When this artifact had discovered" className="input input-bordered" min='0' required />
                         </div>
                         {/* Discovered By */}
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Discovered by/ Credit Line</span>
                             </label>
-                            <input name='discoveredBy' defaultValue={discoveredBy} type="text" placeholder="Discovered by" className="input input-bordered" required />
+                            <input id='discoveredBy' name='discoveredBy' type="text" placeholder="Discovered by" className="input input-bordered" required />
                         </div>
                         {/* Present Location */}
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Present Location</span>
                             </label>
-                            <input name='location' defaultValue={location} type="text" placeholder="Present location" className="input input-bordered" required />
+                            <input id='location' name='location' type="text" placeholder="Present location" className="input input-bordered" required />
                         </div>
                         <div className="form-control mt-6">
                             <button onClick={closeModalClick} className="btn bg-[#ffd700]">Update Artifact</button>
