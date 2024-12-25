@@ -64,7 +64,7 @@ const AddArtifacts = () => {
                         <label className="label">
                             <span className="label-text">Artifact type</span>
                         </label>
-                        <select name="artifactType" onChange={handleChange} defaultValue="Artifact type" className="select select-ghost w-full">
+                        <select name="artifactType" onChange={handleChange} defaultValue="Artifact type" className="select select-ghost w-full" required>
                             <option disabled>Artifact type</option>
                             <option>Tool</option>
                             <option>Weapon</option>

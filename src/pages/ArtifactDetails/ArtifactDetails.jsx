@@ -12,9 +12,9 @@ const ArtifactDetails = () => {
 
     const handleAddLike = async() => {
         try {
-            await axios.get(`${import.meta.env.VITE_API_URL}/like-artifact/${_id}`)
-           
-            // setModified(true)
+            await axios.patch(`${import.meta.env.VITE_API_URL}/like-artifact/${_id}`,{
+                likeCount: likeCount+1,
+            });
             const newLike = like + 1;
             setLike(newLike)
             Swal.fire('Thank you for like the artifact')
