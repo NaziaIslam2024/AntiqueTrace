@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 const MyArtifactCard = ({ oneArtifact }) => {
     const { _id, artifact, artifactType, created, discovered,
     discoveredBy, historicalContexte, location, photoUrl } = oneArtifact;
+    // const [dd, setDD] = useState(oneArtifact);
     const [myFormData, setMyFormData] = useState({});
     const handleChange = (event) => {
         setMyFormData({
@@ -28,15 +29,22 @@ const MyArtifactCard = ({ oneArtifact }) => {
         const initialData = Object.fromEntries(formData.entries());
         console.log(initialData);
         try {
-            await axios.get(`${import.meta.env.VITE_API_URL}/update-artifact-details/${_id}`)
-           .then(data =>[
+            await axios.put(`${import.meta.env.VITE_API_URL}/update-artifact-details/${_id}`,{
+                body: initialData
+            })
+           .then(data =>{
             Swal.fire('Updated.')
-           ])   
+            // setDD(initialData)
+           })   
         } 
         catch (err) {
         console.log(err)
         Swal.fire(err.message)
         }
+    }
+
+    const handleDelete = async() => {
+        await axios.delete(`${import.meta.env.VITE_API_URL}/delete-my-artifact/${_id}`)
     }
 
     return (
@@ -53,7 +61,7 @@ const MyArtifactCard = ({ oneArtifact }) => {
                 <figure className='relative'>
                     <img className='h-[400px] w-full' src={photoUrl} alt="artifact image" />
                     <button onClick={() => handleUpdateClick(oneArtifact)} className='absolute bottom-10 left-5 btn bg-black border border-[#ffd700] text-[#ffd700]'>Update</button>
-                    <button className='absolute bottom-10 right-5 btn bg-black border border-[#ffd700] text-[#ffd700]'>Delete</button>
+                    <button onClick={() => handleDelete(_id)} className='absolute bottom-10 right-5 btn bg-black border border-[#ffd700] text-[#ffd700]'>Delete</button>
                 </figure>
             </div>
             <dialog id="my_modal_3" className="modal">
