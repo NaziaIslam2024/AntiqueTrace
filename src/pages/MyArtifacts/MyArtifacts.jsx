@@ -5,7 +5,7 @@ import MyArtifactCard from '../../components/MyArtifactCard/MyArtifactCard';
 const MyArtifacts = () => {
     const myAddedArtifacts = useLoaderData();
     // const [filteredArtifacts, setFilteredArtifacts] = useState([]);
-    
+
     // const handleDataFromChild = (ata) => {
     //     const remainingArti = myAddedArtifacts.filter(visa => visa._id !== ata);
     //     setFilteredArtifacts(remainingArti)

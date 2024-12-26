@@ -13,7 +13,7 @@ const MyArtifactCard = ({ oneArtifact }) => {
     }, [user])
 
     const fetchAllArtifacts = async () => {
-        const { data } = await axios.get(`http://localhost:5000/my-artifacts/${user?.email}`)
+        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/my-artifacts/${user?.email}`)
         // console.log(data)
         setAllArtifacts(data);
     }
