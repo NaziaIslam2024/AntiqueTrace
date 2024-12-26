@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { FcLike } from "react-icons/fc";
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import AuthContext from '../../context/AuthContext/AuthContext';
 
 const ArtifactDetails = () => {
+    const {user} = useContext(AuthContext);
     const artifactDetails = useLoaderData();
     const {_id, artifact, photoUrl, discoveredBy, artifactType, created, discovered, historicalContexte, likeCount, location} =artifactDetails;
     const [like, setLike] = useState(likeCount);
@@ -17,6 +19,10 @@ const ArtifactDetails = () => {
             });
             const newLike = like + 1;
             setLike(newLike)
+            await axios.post(`${import.meta.env.VITE_API_URL}/user-liked-artifact`,{
+                userEmail: user.email,
+                likedArtifactId: _id
+            });
             Swal.fire('Thank you for like the artifact')
         } 
         catch (err) {
