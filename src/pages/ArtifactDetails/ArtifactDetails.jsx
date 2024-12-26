@@ -9,6 +9,7 @@ const ArtifactDetails = () => {
     const {user} = useContext(AuthContext);
     const artifactDetails = useLoaderData();
     const {_id, artifact, photoUrl, discoveredBy, artifactType, created, discovered, historicalContexte, likeCount, location} =artifactDetails;
+    const likedArtifact = {artifact, photoUrl, discoveredBy, artifactType, created, discovered, historicalContexte, likeCount, location}
     const [like, setLike] = useState(likeCount);
     // const [modified, setModified] = useState(false)
 
@@ -21,7 +22,8 @@ const ArtifactDetails = () => {
             setLike(newLike)
             await axios.post(`${import.meta.env.VITE_API_URL}/user-liked-artifact`,{
                 userEmail: user.email,
-                likedArtifactId: _id
+                // likedArtifactId: _id
+                likedArtifact: likedArtifact
             });
             Swal.fire('Thank you for like the artifact')
         } 

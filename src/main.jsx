@@ -47,7 +47,7 @@ const router = createBrowserRouter([
       {
         path:'myArtifacts/:email',
         element: <PrivateRoute><MyArtifacts></MyArtifacts></PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:5000/my-artifacts/${params.email}`)
+        loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/my-artifacts/${params.email}`)
       },
       {
         path:'likedArtifacts',
@@ -56,7 +56,7 @@ const router = createBrowserRouter([
       {
         path:'/artifact-details/:id',
         element:<PrivateRoute><ArtifactDetails></ArtifactDetails></PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:5000/artifact-details/${params.id}`)
+        loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/artifact-details/${params.id}`)
       }
     ]
   },

@@ -35,7 +35,7 @@ const AllArtifacts = () => {
     };
     return (
         <>
-            <div className='md:w-1/3 md:mx-auto mb-5'>
+            <div className='md:w-1/3 md:mx-auto mb-10'>
                 <input className="input input-bordered" onChange={handleSearchChange} placeholder='Artifact name' type="text" name="search" id="" />
                 <button className='btn btn-info ml-4 text-lg' onClick={handleSearch}>Search</button>
             </div>
