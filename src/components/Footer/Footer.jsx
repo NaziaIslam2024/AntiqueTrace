@@ -17,7 +17,7 @@ const Footer = () => {
     return (
         <div className='justify-end items-end'>
             <img className='h-[150px] w-full' src={wave} alt="" />
-            <footer className="footer bg-[#ffd700] text-base-content p-10">
+            <footer className="footer bg-[#ffd700] p-10">
                 <aside className="grid-flow-col items-center">
                     <img className='w-[70px] h-[70]' src={at} alt="logo" />
                 </aside>

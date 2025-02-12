@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import logo from '../../assets/AT.png'
 import AuthContext from '../../context/AuthContext/AuthContext';
 import Swal from 'sweetalert2';
 import 'react-tooltip/dist/react-tooltip.css'
 import { Tooltip } from 'react-tooltip'
+import logo from '../../assets/AT.png'
 
-const Navbar = () => {
+const Navbar2 = () => {
     const { signOutUser, user } = useContext(AuthContext);
     const navigate = useNavigate();
 
@@ -30,9 +30,10 @@ const Navbar = () => {
             </>
         }
     </>
+
     return (
-        <div className='navbar top-0 fixed z-30 text-[#ffd700] py-0 bg-black'>
-            <div className="container mx-auto flex items-center">
+        <div className='bg-black bg-opacity-90 sticky top-0 z-50 text-[#ffd700]'>
+            <div className="navbar lg:max-w-7xl mx-auto">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -51,27 +52,27 @@ const Navbar = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                            {links}
+                            className="bg-black menu menu-sm dropdown-content rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                           {links}
                         </ul>
                     </div>
-                    <a href='/' className="flex lg:text-3xl text-lg"><img className='w-16' src={logo} alt="" />Antique Trace</a>
-                    
+                    <a className="flex items-center text-lg md:text-3xl font-bold">
+                    <img className='w-16' src={logo} alt="" />Antique Trace</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1 font-bold text-lg">
+                    <ul className="menu menu-horizontal px-1">
                         {links}
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    {
+                {
                         user ?
                             <>
                                 <div className="dropdown dropdown-end">
                                     <div data-tooltip-id="my-tooltip" tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                                        <Tooltip id="my-tooltip" place="top" type="light" effect="float">
+                                        {/* <Tooltip id="my-tooltip" place="left" type="light" effect="float">
                                             <span>{user.displayName}</span>
-                                        </Tooltip>
+                                        </Tooltip> */}
                                         <div className="w-10 rounded-full">
                                             <img alt="userPhotoo" src={user.photoURL} />
                                         </div>
@@ -94,11 +95,10 @@ const Navbar = () => {
                                 <Link className='btn bg-black text-[#ffd700] border-[#ffd700]' to='/register'>Sign up</Link>
                             </>
                     }
-
                 </div>
             </div>
         </div>
     );
 };
 
-export default Navbar;
+export default Navbar2;
