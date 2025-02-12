@@ -6,15 +6,16 @@ const AllArtifacts = () => {
     const [artifacts, setArtifacts] = useState([])
     const [searchValue, setSearchTerm] = useState('');
     const [filteredArt, setFilteredAppliedArt] = useState([]);
+    useEffect(() => {
+        fetchAllArtifacts()
+    }, [])
     // const [allVisa, setAllVisa] = useState(artifacts);
     const fetchAllArtifacts = async () => {
         const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/all-artifacts`)
         setArtifacts(data)
         setFilteredAppliedArt(data)
     }
-    useEffect(() => {
-        fetchAllArtifacts()
-    }, [])
+    
     // console.log(artifacts);
     ///////////////////////
     const handleSearchChange = (event) => {

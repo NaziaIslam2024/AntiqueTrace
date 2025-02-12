@@ -17,6 +17,7 @@ import PrivateRoute from './routes/PrivateRoute';
 import MyArtifacts from './pages/MyArtifacts/MyArtifacts';
 import LikedArtifacts from './pages/LikedArtifacts/LikedArtifacts';
 import ArtifactDetails from './pages/ArtifactDetails/ArtifactDetails';
+import axios from 'axios';
 
 const router = createBrowserRouter([
   {
@@ -47,7 +48,8 @@ const router = createBrowserRouter([
       {
         path:'myArtifacts/:email',
         element: <PrivateRoute><MyArtifacts></MyArtifacts></PrivateRoute>,
-        loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/my-artifacts/${params.email}`)
+        loader:({params}) => fetch(`${import.meta.env.VITE_API_URL}/my-artifacts/${params.email}`)
+        // loader:async({params}) => await axios.get(`${import.meta.env.VITE_API_URL}/my-artifacts/${params.email}`, {withCredentials: ture})
       },
       {
         path:'likedArtifacts',

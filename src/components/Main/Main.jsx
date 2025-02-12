@@ -6,8 +6,9 @@ import Footer from '../Footer/Footer';
 const Main = () => {
     return (
         <div className='bg-black'>
+             <Navbar></Navbar>
             <div className='container mx-auto'>
-                <Navbar></Navbar>
+                {/* <Navbar></Navbar> */}
                 <Outlet></Outlet>
             </div>
             <Footer></Footer>

@@ -1,5 +1,5 @@
 import React from 'react';
-import at from '../../assets/logoBig.png'
+import at from '../../assets/AT.png'
 import wave from '../../assets/Wave.svg'
 import { Link } from 'react-router-dom';
 

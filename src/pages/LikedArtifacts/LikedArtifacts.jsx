@@ -3,13 +3,16 @@ import React, { useContext, useEffect, useState } from 'react';
 import AuthContext from '../../context/AuthContext/AuthContext';
 import { FcLike } from "react-icons/fc";
 import ff from '../../assets/empty.svg'
+import { axiosSecure } from '../../hooks/useAxiosSecure';
 
 const LikedArtifacts = () => {
     const { user } = useContext(AuthContext);
     const [likedArtifacts, setLikedArtifacts] = useState([])
     const [mapArt, setMapArt] = useState([]);
     const likedArtifactId = async () => {
-        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/all-liked-artifacts/${user.email}`);
+        // const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/all-liked-artifacts/${user.email}`, {withCredentials: true});
+        const { data } = await axiosSecure.get(`/all-liked-artifacts/${user.email}`);
+        
         console.log(data)
         setLikedArtifacts(data);
     }

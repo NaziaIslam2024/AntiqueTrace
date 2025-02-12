@@ -9,7 +9,7 @@ const FeaturedArtifact = () => {
 
     const dataCallFunction = async () => {
         const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/artifacts/featured`)
-        console.log(data)
+        // console.log(data)
         setArtifact(data);
     }
 

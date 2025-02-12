@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import logo from '../../assets/logoBig.png'
+import logo from '../../assets/AT.png'
 import AuthContext from '../../context/AuthContext/AuthContext';
 import Swal from 'sweetalert2';
 import 'react-tooltip/dist/react-tooltip.css'
@@ -54,8 +54,8 @@ const Navbar = () => {
                         {links}
                     </ul>
                 </div>
-                <img className='w-10' src={logo} alt="" />
-                <a className="btn btn-ghost text-xl">Antique Trace</a>
+                
+                <a href='/' className="btn btn-ghost text-3xl"><img className='w-16' src={logo} alt="" /> Antique Trace</a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 font-bold text-lg">

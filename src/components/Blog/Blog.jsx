@@ -2,7 +2,7 @@ import React from 'react';
 
 const Blog = () => {
     return (
-        <div className='my-20 p-5'>
+        <div className='my-20 p-5 mx-auto'>
             <h1 className="text-3xl mb-10 text-center">Blogs</h1>
             <div>
                 <div className='flex gap-1'>
@@ -21,7 +21,7 @@ const Blog = () => {
                     <div className='flex-1'>
                         <div className="card">
                             <figure>
-                                <iframe width="100%" height="400" src="https://www.youtube.com/embed/XGH8i6Bu8qw" title="Exhibition Tour—Flight Into Egypt: Black Artists and Ancient Egypt, 1876–Now | Met Exhibitions" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                <iframe width="100%" height="400" src="https://www.youtube.com/embed/XGH8i6Bu8qw" title="Exhibition Tour—Flight Into Egypt: Black Artists and Ancient Egypt, 1876–Now | Met Exhibitions" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                             </figure>
                             <div className="card-body">
                                 <h2 className="card-title">Exhibition Tour—Flight Into Egypt: Black Artists and Ancient Egypt, 1876–Now</h2>
@@ -35,7 +35,7 @@ const Blog = () => {
                     <div className='flex-1'>
                         <div className="card">
                             <figure>
-                                <iframe width="100%" height="300" src="https://www.youtube.com/embed/rvbH2OCxWIM" title="Todd Oldham: The Muchness of André Leon Talley" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                <iframe width="100%" height="300" src="https://www.youtube.com/embed/rvbH2OCxWIM" title="Todd Oldham: The Muchness of André Leon Talley" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                             </figure>
                             <div className="card-body">
                                 <h2 className="card-title">Todd Oldham: The Muchness of André Leon Talley</h2>
