@@ -8,7 +8,7 @@ import MyNewSlider from '../../components/MyNewSlider/MyNewSlider';
 
 const Home = () => {
     return (
-        <div className='bg-white '>
+        <div className='bg-white'>
             <MyNewSlider></MyNewSlider>
             {/* <MySlider></MySlider> */}
             <FeaturedArtifact></FeaturedArtifact>
