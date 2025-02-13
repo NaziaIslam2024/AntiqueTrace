@@ -4,6 +4,7 @@ import FeaturedArtifact from '../../components/FeaturedArtifact/FeaturedArtifact
 import Blog from '../../components/Blog/Blog';
 import Galary from '../../components/Galary/Galary';
 import MyNewSlider from '../../components/MyNewSlider/MyNewSlider';
+import Review from '../../components/Review/Review';
 
 
 const Home = () => {
@@ -13,6 +14,7 @@ const Home = () => {
             {/* <MySlider></MySlider> */}
             <FeaturedArtifact></FeaturedArtifact>
             <Galary></Galary>
+            <Review></Review>
             <Blog></Blog>
         </div>
     );

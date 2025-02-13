@@ -19,6 +19,13 @@ import LikedArtifacts from './pages/LikedArtifacts/LikedArtifacts';
 import ArtifactDetails from './pages/ArtifactDetails/ArtifactDetails';
 import axios from 'axios';
 import Newsletter from './pages/Newsletter/Newsletter';
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+import Contact from './pages/Contact/Contact';
+
+const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
   {
@@ -40,7 +47,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'contact',
-        element: <AllArtifacts></AllArtifacts>
+        element: <Contact></Contact>
       },
       {
         path: 'login',
@@ -51,23 +58,23 @@ const router = createBrowserRouter([
         element: <Register></Register>
       },
       {
-        path:'addArtifacts',
+        path: 'addArtifacts',
         element: <PrivateRoute><AddArtifacts></AddArtifacts></PrivateRoute>
       },
       {
-        path:'myArtifacts/:email',
+        path: 'myArtifacts/:email',
         element: <PrivateRoute><MyArtifacts></MyArtifacts></PrivateRoute>,
-        loader:({params}) => fetch(`${import.meta.env.VITE_API_URL}/my-artifacts/${params.email}`)
+        loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/my-artifacts/${params.email}`)
         // loader:async({params}) => await axios.get(`${import.meta.env.VITE_API_URL}/my-artifacts/${params.email}`, {withCredentials: ture})
       },
       {
-        path:'likedArtifacts',
+        path: 'likedArtifacts',
         element: <PrivateRoute><LikedArtifacts></LikedArtifacts></PrivateRoute>
       },
       {
-        path:'/artifact-details/:id',
-        element:<PrivateRoute><ArtifactDetails></ArtifactDetails></PrivateRoute>,
-        loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/artifact-details/${params.id}`)
+        path: '/artifact-details/:id',
+        element: <PrivateRoute><ArtifactDetails></ArtifactDetails></PrivateRoute>,
+        loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/artifact-details/${params.id}`)
       }
     ]
   },
@@ -77,7 +84,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
     </AuthProvider>
   </StrictMode>,
 )

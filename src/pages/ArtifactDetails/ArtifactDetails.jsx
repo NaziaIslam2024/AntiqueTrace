@@ -16,8 +16,8 @@ const ArtifactDetails = () => {
 
     const getlikedCount = async() => {
         const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/get-liked-artifact/${user.email}/${_id}`);
-        console.log(data)
-        console.log(data.userEmail)
+        // console.log(data)
+        // console.log(data.userEmail)
         // if(data.userEmail != '')
         if(data.userEmail!== undefined)    {
             // console.log("nice")

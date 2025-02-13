@@ -24,7 +24,7 @@ const Navbar2 = () => {
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/allArtifacts'>All Artifacts</NavLink></li>
         <li><NavLink to='/newsletter'>Newsletter</NavLink></li>
-        <li><NavLink to='/contact'>Contact</NavLink></li>
+        <li><NavLink to='/contact'>About Artifacts</NavLink></li>
         {
             user && <>
                 <li><NavLink to='/addArtifacts'>Add Artifacts</NavLink></li>
@@ -93,7 +93,7 @@ const Navbar2 = () => {
                             </>
                             :
                             <>
-                                <Link className='btn bg-black text-[#ffd700] border-[#ffd700]' to='/login'>Sign in</Link>
+                                <Link className='btn bg-black text-[#ffd700] border-[#ffd700] mr-2' to='/login'>Sign in</Link>
                                 <Link className='btn bg-black text-[#ffd700] border-[#ffd700]' to='/register'>Sign up</Link>
                             </>
                     }
