@@ -7,6 +7,8 @@ const Footer = () => {
     const links = <>
         <li><Link className='link link-hover' to='/'>Home</Link></li>
         <li><Link className='link link-hover' to='/allArtifacts'>All Artifacts</Link></li>
+        <li><Link to='/newsletter'>Newsletter</Link></li>
+        <li><Link to='/contact'>Contact</Link></li>
        {/* {
             user && <>
                 <li><NavLink to='/tutorials'>Tutorials</NavLink></li>

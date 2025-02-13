@@ -18,6 +18,7 @@ import MyArtifacts from './pages/MyArtifacts/MyArtifacts';
 import LikedArtifacts from './pages/LikedArtifacts/LikedArtifacts';
 import ArtifactDetails from './pages/ArtifactDetails/ArtifactDetails';
 import axios from 'axios';
+import Newsletter from './pages/Newsletter/Newsletter';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,14 @@ const router = createBrowserRouter([
       },
       {
         path: 'allArtifacts',
+        element: <AllArtifacts></AllArtifacts>
+      },
+      {
+        path: 'newsletter',
+        element: <Newsletter></Newsletter>
+      },
+      {
+        path: 'contact',
         element: <AllArtifacts></AllArtifacts>
       },
       {

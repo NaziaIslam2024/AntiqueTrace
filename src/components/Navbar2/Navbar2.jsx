@@ -23,6 +23,8 @@ const Navbar2 = () => {
     const links = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/allArtifacts'>All Artifacts</NavLink></li>
+        <li><NavLink to='/newsletter'>Newsletter</NavLink></li>
+        <li><NavLink to='/contact'>Contact</NavLink></li>
         {
             user && <>
                 <li><NavLink to='/addArtifacts'>Add Artifacts</NavLink></li>
